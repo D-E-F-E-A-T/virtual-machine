@@ -7,21 +7,21 @@ import java.util.ArrayList;
 public class Main {
     public static void main(final String[] args) {
 
-        int j = 0;
+        int j = 0; //Variavel de controple
 
         final String fileName;
 
-        final Instructions briefing = new Instructions();
+        final Instructions briefing = new Instructions(); //Instancia da classe Instructions
 
         final ArrayList<Register> registers = new ArrayList<>();// ArrayList<> para guardar os registradores
-        final String[] instruction = { "0000000100100011", "0010001100000001" }; // Instruções na memória
+        final String[] instruction = { "0000000100100011", "0010001100000001" }; // Instruções na memória principal
 
-        final Cache cache = new Cache();
+        final Cache cache = new Cache(); //Instancia da cache
+
         createRecords(registers); // Cria registradores
 
-        for (int i = 0; i < instruction.length; i++) {
-            allMethods(cache, i, j, instruction, briefing, registers);
-
+        for (int i = 0; i < instruction.length; i++) { //For para percorrer os endereços de memória, onde i representa o PC
+            allMethods(cache, i, j, instruction, briefing, registers); //Método onde executa todas as funções
         }
 
     }
@@ -44,6 +44,7 @@ public class Main {
         jv2.value = 6;
         jv3.value = 10;
 
+        //Adiciona os registradores dentro do ArrayList<Registradores>
         registers.add(jv0);
         registers.add(jv1);
         registers.add(jv2);
@@ -51,6 +52,7 @@ public class Main {
 
     }
 
+    //Divide as Instrições de 4 em 4 bits, e armazena nos respectivos registradores(OP | JVS | JVT | JVD)
     public static void goThroughArray(final Instructions briefing, final String[] instructions, final int pos) {
 
         briefing.opCode = instructions[pos].substring(0, 4);
@@ -63,11 +65,13 @@ public class Main {
 
     }
 
+    //Método para execução das instruçoes
     public static void allMethods(Cache cache, int i, int j, String[] instruction, Instructions briefing,
             ArrayList<Register> registers) {
-        if (cache.instruction[i].equals(instruction[i])) {
-            cache.tag = true;
+        if (cache.instruction[i].equals(instruction[i])) { //Verifica se a instrução existe na memória cache
+            cache.tag = true; //Caso exista
             System.out.println("Hit");
+
             goThroughArray(briefing, instruction, i);// Percorre o Array, intepreta a instrução
 
             showOrganization(briefing);// Mostra a organização
@@ -79,11 +83,12 @@ public class Main {
             briefing.execute();// Executa
 
             System.out.println("");
+
         } else {
             System.out.println("Miss"); // Caso não exista na memoria
             cache.instruction[j] = instruction[j]; // Cache busca a instrução na memoria principal e insere ela
             j++;
-            allMethods(cache, i, j, instruction, briefing, registers);
+            allMethods(cache, i, j, instruction, briefing, registers); //Executa a Instrução novamente 
         }
 
     }
