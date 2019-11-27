@@ -15,14 +15,27 @@ public class Instructions {
             registerAnswer.value = registerOne.value + registerTwo.value;
             System.out.println("===============[SUM]================");
             System.out.println("| ADDRESS ------------------ VALUE |");
-            System.out.println("| [" + registerAnswer.address + "]  -------------------  [" + registerAnswer.value + "]  |");
+            System.out.println(
+                    "| [" + registerAnswer.address + "]  -------------------  [" + registerAnswer.value + "]  |");
             System.out.println("====================================");
             break;
 
-        case "0001":
-            break; // instrução addi
+        case "0100":
+            break;
 
+        case "0010":
+            registerAnswer.value = registerOne.value - registerTwo.value;
+            System.out.println("===============[SUB]================");
+            System.out.println("| ADDRESS ------------------ VALUE |");
+            System.out.println(
+                    "| [" + registerAnswer.address + "]  -------------------  [" + registerAnswer.value + "]  |");
+            System.out.println("====================================");
+            break;
+
+        case "0101":
+            break;
         }
+
     }
 
 }

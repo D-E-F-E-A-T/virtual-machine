@@ -18,6 +18,7 @@ public class Files{
             
             while(fileOne.hasNext()){
                 text = text + fileOne.next();
+                System.out.println(text);
             }
             
             instructions.add(text);
