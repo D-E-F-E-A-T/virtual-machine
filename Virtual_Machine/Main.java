@@ -14,8 +14,9 @@ public class Main {
         final Instructions briefing = new Instructions(); //Instancia da classe Instructions
 
         final ArrayList<Register> registers = new ArrayList<>();// ArrayList<> para guardar os registradores
-        final String[] instruction = { "0000000100100011", "0010001100000001" }; // Instruções na memória principal
-
+        final String[] instruction = { "0000000100100011", "0010001100000001" , "0100000000000000"}; // Instruções na memória principal/memoria de programa
+        
+        
         final Cache cache = new Cache(); //Instancia da cache
 
         createRecords(registers); // Cria registradores
@@ -100,6 +101,9 @@ public class Main {
         }
         if (briefing.opCode.equals("0010")) {
             instruction = "SUB";
+        }
+        if(briefing.opCode.equals("0100")){
+            instruction = "LOAD";
         }
         System.out.println("===============[" + instruction + "]================");
         System.out.println("| OP ----- JVS ----- JVT ----- JVD |");

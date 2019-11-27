@@ -8,6 +8,9 @@ public class Instructions {
     public Register registerOne;
     public Register registerTwo;
     public Register registerAnswer;
+    final int[] memData = {12, 16, 20};
+
+     
 
     public void execute() {
         switch (opCode) {
@@ -20,10 +23,14 @@ public class Instructions {
             System.out.println("====================================");
             break;
 
-        case "0100":
+        case "0100"://Instrução de Load
+            final int address = Integer.parseInt(registerTwo.address + registerAnswer.address);
+
+            registerOne.value = memData[address];
+            System.out.println("Valor do jv" + Integer.parseInt(registerOne.address, 16) + ": " + registerOne.value);
             break;
 
-        case "0010":
+        case "0010"://Instrução de sub
             registerAnswer.value = registerOne.value - registerTwo.value;
             System.out.println("===============[SUB]================");
             System.out.println("| ADDRESS ------------------ VALUE |");
